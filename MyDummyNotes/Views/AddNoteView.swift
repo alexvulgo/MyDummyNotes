@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  AddNoteView.swift
 //  MyDummyNotes
 //
 //  Created by Alessandro Esposito Vulgo Gigante on 14/11/23.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct AddNoteView: View {
     var body: some View {
-        Text("Starting NC1!")
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    MainView()
+    AddNoteView()
 }

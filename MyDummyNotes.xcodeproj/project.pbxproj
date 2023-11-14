@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA09DF842B03FABC00A18B29 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09DF832B03FABC00A18B29 /* AddNoteView.swift */; };
 		FA6F77022B039171002F97CD /* MyDummyNotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F77012B039171002F97CD /* MyDummyNotesApp.swift */; };
 		FA6F77042B039171002F97CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F77032B039171002F97CD /* ContentView.swift */; };
 		FA6F77062B039171002F97CD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F77052B039171002F97CD /* Item.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA09DF832B03FABC00A18B29 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		FA6F76FE2B039171002F97CD /* MyDummyNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDummyNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6F77012B039171002F97CD /* MyDummyNotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDummyNotesApp.swift; sourceTree = "<group>"; };
 		FA6F77032B039171002F97CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +38,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA09DF822B03FA3F00A18B29 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA6F77112B039227002F97CD /* MainView.swift */,
+				FA09DF832B03FABC00A18B29 /* AddNoteView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FA6F76F52B039171002F97CD = {
 			isa = PBXGroup;
 			children = (
@@ -58,7 +69,7 @@
 				FA6F77012B039171002F97CD /* MyDummyNotesApp.swift */,
 				FA6F77032B039171002F97CD /* ContentView.swift */,
 				FA6F77052B039171002F97CD /* Item.swift */,
-				FA6F77112B039227002F97CD /* MainView.swift */,
+				FA09DF822B03FA3F00A18B29 /* Views */,
 				FA6F77072B039172002F97CD /* Assets.xcassets */,
 				FA6F77092B039172002F97CD /* Preview Content */,
 			);
@@ -147,6 +158,7 @@
 				FA6F77122B039227002F97CD /* MainView.swift in Sources */,
 				FA6F77062B039171002F97CD /* Item.swift in Sources */,
 				FA6F77022B039171002F97CD /* MyDummyNotesApp.swift in Sources */,
+				FA09DF842B03FABC00A18B29 /* AddNoteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
