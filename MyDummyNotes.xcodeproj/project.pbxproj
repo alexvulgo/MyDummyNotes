@@ -12,6 +12,7 @@
 		FA6F77062B039171002F97CD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F77052B039171002F97CD /* Item.swift */; };
 		FA6F77082B039172002F97CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6F77072B039172002F97CD /* Assets.xcassets */; };
 		FA6F770B2B039172002F97CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6F770A2B039172002F97CD /* Preview Assets.xcassets */; };
+		FA6F77122B039227002F97CD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F77112B039227002F97CD /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		FA6F77052B039171002F97CD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FA6F77072B039172002F97CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA6F770A2B039172002F97CD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FA6F77112B039227002F97CD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				FA6F77012B039171002F97CD /* MyDummyNotesApp.swift */,
 				FA6F77032B039171002F97CD /* ContentView.swift */,
 				FA6F77052B039171002F97CD /* Item.swift */,
+				FA6F77112B039227002F97CD /* MainView.swift */,
 				FA6F77072B039172002F97CD /* Assets.xcassets */,
 				FA6F77092B039172002F97CD /* Preview Content */,
 			);
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6F77042B039171002F97CD /* ContentView.swift in Sources */,
+				FA6F77122B039227002F97CD /* MainView.swift in Sources */,
 				FA6F77062B039171002F97CD /* Item.swift in Sources */,
 				FA6F77022B039171002F97CD /* MyDummyNotesApp.swift in Sources */,
 			);
