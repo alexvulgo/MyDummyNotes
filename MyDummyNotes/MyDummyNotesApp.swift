@@ -12,7 +12,8 @@ import SwiftData
 struct MyDummyNotesApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            //Item.self,
+            DataNote.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -28,5 +29,6 @@ struct MyDummyNotesApp: App {
             MainView()
         }
         .modelContainer(sharedModelContainer)
+        //.modelContainer(for: DataNote.self)
     }
 }
