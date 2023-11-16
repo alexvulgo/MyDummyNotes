@@ -21,10 +21,13 @@ struct MainView: View {
         NavigationStack {
             List() {
                 ForEach(notes) { note in
-                    VStack(alignment: .leading){
-                        Text(note.title)
-                            .bold()
-                        Text(note.additionalText)
+                    NavigationLink(destination: EditNoteView(note : note)) {
+                        VStack(alignment: .leading){
+                            //Text(note.title)
+                                //.bold()
+                            Text(note.additionalText)
+                                .lineLimit(1)
+                        }
                     }
                 }
                 .onDelete { indexes in
@@ -39,15 +42,30 @@ struct MainView: View {
             .navigationTitle("Notes")
             
             .toolbar {
-                
                 ToolbarItem(placement: .bottomBar) {
+                    
                     Spacer()
+                    
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
-                    Button("Add Note", systemImage : "square.and.pencil") {
+                    
+                    Text(String(notes.count) + " Notes")
+                    
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    
+                    Spacer()
+                    
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationLink(destination: AddNoteView()){
+                        Button("Add Note", systemImage : "square.and.pencil") {
+                        }
                         
-                        addNote()
+                        
                         
                     }
                     
@@ -60,14 +78,7 @@ struct MainView: View {
         
         
     }
-    
-    func addNote() {
-        //Create the note
-        //Add the item to the data context
-        let note = DataNote(title:"Test" , additionalText: "Testing how to save strings")
-        context.insert(note)
-    }
-    
+ 
     func deleteNote( _ note: DataNote) {
         //Delete the note
         // The underscored variable name refers to the underlying storage

@@ -14,6 +14,7 @@
 		FA6F77082B039172002F97CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6F77072B039172002F97CD /* Assets.xcassets */; };
 		FA6F770B2B039172002F97CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6F770A2B039172002F97CD /* Preview Assets.xcassets */; };
 		FA6F77122B039227002F97CD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F77112B039227002F97CD /* MainView.swift */; };
+		FACA3E062B057E8F00A12C03 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA3E052B057E8F00A12C03 /* EditNoteView.swift */; };
 		FACBA0A22B04C34800FC8C27 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACBA0A12B04C34800FC8C27 /* NoteModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		FA6F77072B039172002F97CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA6F770A2B039172002F97CD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA6F77112B039227002F97CD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		FACA3E052B057E8F00A12C03 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		FACBA0A12B04C34800FC8C27 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -45,6 +47,7 @@
 			children = (
 				FA6F77112B039227002F97CD /* MainView.swift */,
 				FA09DF832B03FABC00A18B29 /* AddNoteView.swift */,
+				FACA3E052B057E8F00A12C03 /* EditNoteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				FA6F77062B039171002F97CD /* Item.swift in Sources */,
 				FA6F77022B039171002F97CD /* MyDummyNotesApp.swift in Sources */,
 				FA09DF842B03FABC00A18B29 /* AddNoteView.swift in Sources */,
+				FACA3E062B057E8F00A12C03 /* EditNoteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

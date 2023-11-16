@@ -1,28 +1,31 @@
 //
-//  AddNoteView.swift
+//  EditNoteView.swift
 //  MyDummyNotes
 //
-//  Created by Alessandro Esposito Vulgo Gigante on 14/11/23.
+//  Created by Alessandro Esposito Vulgo Gigante on 15/11/23.
 //
 
 import SwiftUI
-import SwiftData
 
-struct AddNoteView: View {
-    //SwiftData Variable
+struct EditNoteView: View {
+    var note : DataNote
+    
     @Environment(\.modelContext) private var context
-    @Query private var notes : [DataNote]
     
     //Text Editor Field
     @State private var additionalText : String = ""
     
-    @FocusState private var isFocused: Bool
-    
     var body: some View {
+        
+        //additionalText = "ciao"
+        
         NavigationStack {
             VStack(){
+                
                 TextEditor(text: $additionalText)
-                    .focused($isFocused)
+                    .onAppear() {
+                        additionalText = note.additionalText
+                    }
             }
             
             
@@ -30,8 +33,7 @@ struct AddNoteView: View {
                 
                 ToolbarItem() {
                     Button("Done") {
-                        saveText()
-                        isFocused = false
+                        saveText(note)
                     }.bold()
                 }
             }
@@ -39,13 +41,14 @@ struct AddNoteView: View {
     }
     
     //Function for add the additional Text in a Note
-    func saveText() {
-        let note = DataNote(additionalText: additionalText)
-        context.insert(note)
+    func saveText(_ note : DataNote) {
+        note.additionalText = additionalText
+        try? context.save()
         
     }
 }
 
 #Preview {
-    AddNoteView()
+    let note = DataNote(additionalText: "Trying saving strings")
+    return EditNoteView(note: note)
 }

@@ -11,12 +11,12 @@ import SwiftData
 @Model
 class DataNote: Identifiable {
     var id : String
-    var title: String
+    //var title: String
     var additionalText: String
     
-    init(title : String, additionalText: String) {
+    init(additionalText: String) {
         self.id = UUID().uuidString
-        self.title = title
+        //self.title = title
         self.additionalText = additionalText
     }
     
