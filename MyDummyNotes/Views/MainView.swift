@@ -21,7 +21,7 @@ struct MainView: View {
         NavigationStack {
             List() {
                 ForEach(notes) { note in
-                    NavigationLink(destination: EditNoteView(note : note)) {
+                    NavigationLink(destination: AddNoteView(note: note)) {
                         VStack(alignment: .leading){
                             //Text(note.title)
                                 //.bold()
@@ -64,6 +64,9 @@ struct MainView: View {
                     NavigationLink(destination: AddNoteView()){
                         Button("Add Note", systemImage : "square.and.pencil") {
                         }
+
+                        .accessibilityAddTraits([.isButton])
+                        .accessibilityLabel(/*@START_MENU_TOKEN@*/"Label"/*@END_MENU_TOKEN@*/)
                         
                         
                         

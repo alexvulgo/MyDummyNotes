@@ -5,10 +5,14 @@
 //  Created by Alessandro Esposito Vulgo Gigante on 15/11/23.
 //
 
+/*
 import SwiftUI
+import SwiftData
 
 struct EditNoteView: View {
-    var note : DataNote
+    
+    @State var note : DataNote
+    
     
     @Environment(\.modelContext) private var context
     
@@ -16,8 +20,6 @@ struct EditNoteView: View {
     @State private var additionalText : String = ""
     
     var body: some View {
-        
-        //additionalText = "ciao"
         
         NavigationStack {
             VStack(){
@@ -33,7 +35,7 @@ struct EditNoteView: View {
                 
                 ToolbarItem() {
                     Button("Done") {
-                        saveText(note)
+                        updateText(note)
                     }.bold()
                 }
             }
@@ -41,7 +43,7 @@ struct EditNoteView: View {
     }
     
     //Function for add the additional Text in a Note
-    func saveText(_ note : DataNote) {
+    func updateText(_ note : DataNote) {
         note.additionalText = additionalText
         try? context.save()
         
@@ -52,3 +54,5 @@ struct EditNoteView: View {
     let note = DataNote(additionalText: "Trying saving strings")
     return EditNoteView(note: note)
 }
+
+*/
