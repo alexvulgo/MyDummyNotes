@@ -23,10 +23,23 @@ struct MainView: View {
                 ForEach(notes) { note in
                     NavigationLink(destination: AddNoteView(note: note)) {
                         VStack(alignment: .leading){
-                            //Text(note.title)
-                                //.bold()
-                            Text(note.additionalText)
-                                .lineLimit(1)
+                            HStack {
+                                Text(Date.now, format: .dateTime.day().month().year())
+                                    .bold()
+                                    Text(note.additionalText)
+                                        .lineLimit(1)
+                                    Spacer()
+                                
+                                if let imageData = note.image,
+                                   let uiImage = UIImage(data: imageData){
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(maxWidth: 40 , maxHeight: 60)
+                                        .clipShape(Rectangle())
+                                        .cornerRadius(5)
+                                }
+                            }
                         }
                     }
                 }

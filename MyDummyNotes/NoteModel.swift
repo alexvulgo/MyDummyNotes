@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import UIKit
+import SwiftUI
 
 @Model
 class DataNote: Identifiable {
@@ -16,13 +17,12 @@ class DataNote: Identifiable {
     var id : String
     //var title: String
     var additionalText: String
-    //var image : UIImage
+    var image :  Data?
     
     init(additionalText: String) {
         self.id = UUID().uuidString
-        //self.title = title
         self.additionalText = additionalText
-        //self.image =  UIImage(imageLiteralResourceName: "noimage")
+        
     }
     
 }

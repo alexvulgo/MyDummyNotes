@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct AddNoteView: View {
     //SwiftData Variable
@@ -16,17 +17,14 @@ struct AddNoteView: View {
     
     //Text Editor Field
     @State private var additionalText : String = ""
-    
+    //Check if the text editor is focus
     @FocusState private var isFocused: Bool
+    //Image selected
+    @State var selectedPhoto : PhotosPickerItem?
     
-    @State var isPickerShowing = false
+    @State var newPhotoData : Data?
     
-    //@State var isCreated = false
-    
-    @State var selectedImage : UIImage?
-    
-   
-    
+ 
     
     
     var body: some View {
@@ -38,15 +36,19 @@ struct AddNoteView: View {
                     .onAppear() {
                         if(note != nil) {
                             additionalText = note?.additionalText ?? ""
+                        }
                     }
-                }
                 
-                
-                if selectedImage != nil {
-                    Image(uiImage : selectedImage!)
+                //check if it's a new note or a passed one
+                if let imageData = note?.image ?? newPhotoData,
+                   let uiImage = UIImage(data: imageData){
+                    Image(uiImage: uiImage)
                         .resizable()
-                        .frame(width: 200, height: 200)
+                        .scaledToFill()
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/ , maxHeight: 300)
                 }
+                
+                
             }
             
             
@@ -71,15 +73,24 @@ struct AddNoteView: View {
             
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    
-                    Button("Add Note", systemImage : "camera"){
-                        isPickerShowing = true
-                    }
-                    .sheet(isPresented: $isPickerShowing){
-                        //Image Picker
-                        ImagePicker(isPickerShowing: $isPickerShowing,selectedImage: $selectedImage)
+                    PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+                        Label("Add Image", systemImage : "camera")
                     }
                     
+                    
+                }
+                
+            }
+            
+            .task(id: selectedPhoto) {
+                
+                if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
+                    if(note != nil) {
+                        note?.image = data
+                    } else {
+                        newPhotoData = data
+                        
+                    }
                 }
             }
         }
@@ -89,12 +100,13 @@ struct AddNoteView: View {
     func saveText() -> DataNote {
         if(note == nil) {
             let newNote = DataNote(additionalText: additionalText)
-           // self.note = newNote
+            if(newPhotoData != nil) {
+                newNote.image = newPhotoData
+            }
             context.insert(newNote)
             
             return newNote
         }
-        //isCreated = true
         
         return DataNote(additionalText: "")
         
