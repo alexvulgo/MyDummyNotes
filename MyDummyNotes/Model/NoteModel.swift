@@ -15,14 +15,23 @@ class DataNote: Identifiable {
     
     @Attribute(.unique)
     var id : String
-    //var title: String
+    var timeStamp: Date
     var additionalText: String
     var image :  Data?
+    var storedImages : [Data] = []
     
-    init(additionalText: String) {
+    init(additionalText: String, timestamp : Date = .now) {
         self.id = UUID().uuidString
         self.additionalText = additionalText
+        self.timeStamp = timestamp
+        
         
     }
     
 }
+
+
+
+    
+    
+

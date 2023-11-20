@@ -24,11 +24,11 @@ struct MainView: View {
                     NavigationLink(destination: AddNoteView(note: note)) {
                         VStack(alignment: .leading){
                             HStack {
-                                Text(Date.now, format: .dateTime.day().month().year())
+                                Text(note.timeStamp, format: .dateTime.day().month().year())
                                     .bold()
-                                    Text(note.additionalText)
-                                        .lineLimit(1)
-                                    Spacer()
+                                Text(note.additionalText)
+                                    .lineLimit(1)
+                                Spacer()
                                 
                                 if let imageData = note.image,
                                    let uiImage = UIImage(data: imageData){
@@ -77,7 +77,7 @@ struct MainView: View {
                     NavigationLink(destination: AddNoteView()){
                         Button("Add Note", systemImage : "square.and.pencil") {
                         }
-
+                        
                         .accessibilityAddTraits([.isButton])
                         .accessibilityLabel(/*@START_MENU_TOKEN@*/"Label"/*@END_MENU_TOKEN@*/)
                         
@@ -94,7 +94,7 @@ struct MainView: View {
         
         
     }
- 
+    
     func deleteNote( _ note: DataNote) {
         //Delete the note
         // The underscored variable name refers to the underlying storage
