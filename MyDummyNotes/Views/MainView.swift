@@ -30,13 +30,12 @@ struct MainView: View {
                                     .lineLimit(1)
                                 Spacer()
                                 
-                                if let imageData = note.image,
+                                if let imageData = note.storedImages.first,
                                    let uiImage = UIImage(data: imageData){
                                     Image(uiImage: uiImage)
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(maxWidth: 40 , maxHeight: 60)
-                                        .clipShape(Rectangle())
+                                        .frame(maxWidth: 35 , maxHeight: 35)
                                         .cornerRadius(5)
                                 }
                             }

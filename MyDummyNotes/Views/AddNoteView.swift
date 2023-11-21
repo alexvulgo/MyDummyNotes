@@ -21,7 +21,6 @@ struct AddNoteView: View {
     //Check if the text editor is focus
     @FocusState private var isFocused: Bool
     
-    
     //Image selected
     @State var selectedPhoto : PhotosPickerItem?
     
@@ -51,36 +50,60 @@ struct AddNoteView: View {
                                let uiImage = UIImage(data: imageData){
                                 Image(uiImage: uiImage)
                                     .resizable()
-                                    .scaledToFill()
-                                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/ , maxHeight: 300)
+                                    //.scaledToFill()
+                                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/ , maxHeight: .infinity)
+                                    .cornerRadius(15)
+                                    //.padding(5)
+                                
                             }
                             
                         }
                         
                         ForEach(note?.storedImages ?? [], id: \.self) { image in
                             if let uiImage = UIImage(data: image){
+                                
                                 Image(uiImage: uiImage)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(maxWidth: .infinity , maxHeight: 300)
+                                    .frame(maxWidth: .infinity , maxHeight: .infinity)
+                                    .contextMenu(){
+                                        Button(role: .destructive){
+                                            if let idx = note?.storedImages.firstIndex(of: image) {
+                                                note?.storedImages.remove(at: idx)
+                                            }
+                                        }
+                                    label: {
+                                        
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                        
+                                    }
+                                
                             }
                         }
+                        
+                        
                     }.tabViewStyle(.page)
+                        .containerShape(Rectangle())
+                        .cornerRadius(15)
+                        .padding(10)
+                    
+                    
                 }
                 
             }
-                
-              
-                                
-                                //check if it's a new note or a passed one
-                              //  if let imageData = note?.image ?? newPhotoData,
-                                 //  let uiImage = UIImage(data: imageData){
-                                  //  Image(uiImage: uiImage)
-                                       // .resizable()
-                                      //  .scaledToFill()
-                                      //  .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/ , maxHeight: 300)
-                            
-                
+            
+            
+            
+            //check if it's a new note or a passed one
+            //  if let imageData = note?.image ?? newPhotoData,
+            //  let uiImage = UIImage(data: imageData){
+            //  Image(uiImage: uiImage)
+            // .resizable()
+            //  .scaledToFill()
+            //  .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/ , maxHeight: 300)
+            
+            
             
             
             .navigationTitle("Note")
@@ -103,11 +126,8 @@ struct AddNoteView: View {
                         
                     }.bold()
                 }
-            }
             
-            .toolbar {
-  
-                
+
                 ToolbarItem(placement: .bottomBar) {
                     PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
                         Label("Add Image", systemImage : "camera")
@@ -133,7 +153,7 @@ struct AddNoteView: View {
             .task(id: selectedPhoto) {
                 if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
                     if(note != nil) {
-                        note?.image = data
+                        //note?.image = data
                         note?.storedImages.append(data)
                         selectedPhoto = nil
                     } else {
@@ -153,7 +173,7 @@ struct AddNoteView: View {
         if(note == nil) {
             let newNote = DataNote(additionalText: additionalText)
             if(newPhotoData != nil) {
-                newNote.image = newPhotoData
+                //newNote.image = newPhotoData
                 newNote.storedImages.append(newPhotoData!)
             }
             context.insert(newNote)

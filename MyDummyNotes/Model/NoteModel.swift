@@ -17,7 +17,7 @@ class DataNote: Identifiable {
     var id : String
     var timeStamp: Date
     var additionalText: String
-    var image :  Data?
+    //var image :  Data?
     var storedImages : [Data] = []
     
     init(additionalText: String, timestamp : Date = .now) {
