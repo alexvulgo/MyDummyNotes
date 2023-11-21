@@ -78,7 +78,8 @@ struct MainView: View {
                         }
                         
                         .accessibilityAddTraits([.isButton])
-                        .accessibilityLabel(/*@START_MENU_TOKEN@*/"Label"/*@END_MENU_TOKEN@*/)
+                        .accessibilityLabel("New note")
+                        .accessibilityHint("Double tap to compose a new note")
                         
                         
                         
@@ -100,7 +101,15 @@ struct MainView: View {
         context.delete(note)
     }
     
+    
+    
+    
+    
 }
+
+
+
+
 
 #Preview {
     MainView()

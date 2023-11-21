@@ -30,8 +30,10 @@ struct AddNoteView: View {
         
         NavigationStack {
             VStack(){
+               
                 
                 TextEditor(text: $additionalText)
+                    .font(.body) //use font that support dynamic type
                     .focused($isFocused)
                     .onAppear() {
                         if(note != nil) {
@@ -50,10 +52,21 @@ struct AddNoteView: View {
                                let uiImage = UIImage(data: imageData){
                                 Image(uiImage: uiImage)
                                     .resizable()
-                                    //.scaledToFill()
-                                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/ , maxHeight: .infinity)
+                                    .scaledToFill()
+                                    .frame(maxWidth: .infinity , maxHeight: .infinity)
                                     .cornerRadius(15)
-                                    //.padding(5)
+                                    .contextMenu(){
+                                        Button(role: .destructive) {
+                                            newPhotoData = nil
+                                        }
+                                        
+                                    label: {
+                                        
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                        
+                                    }
+                                //.padding(5)
                                 
                             }
                             
@@ -63,6 +76,7 @@ struct AddNoteView: View {
                             if let uiImage = UIImage(data: image){
                                 
                                 Image(uiImage: uiImage)
+                                    
                                     .resizable()
                                     .scaledToFill()
                                     .frame(maxWidth: .infinity , maxHeight: .infinity)
@@ -78,6 +92,9 @@ struct AddNoteView: View {
                                     }
                                         
                                     }
+                                    .accessibilityLabel("Image attachment")
+                                    .accessibilityHint("Double tap and hold to scroll")
+                                    
                                 
                             }
                         }
@@ -101,16 +118,16 @@ struct AddNoteView: View {
             //  Image(uiImage: uiImage)
             // .resizable()
             //  .scaledToFill()
-            //  .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/ , maxHeight: 300)
+            //  .frame(maxWidth: .infinity , maxHeight: 300)
             
             
             
             
-            .navigationTitle("Note")
+            .navigationTitle("\(note?.timeStamp ?? Date.now, format: .dateTime.day().month().year()) \(note?.timeStamp ?? Date.now, format: .dateTime.hour().minute())")
+            .navigationBarTitleDisplayMode(.inline)
             
             
             .toolbar {
-                
                 ToolbarItem() {
                     Button("Done") {
                         if(note != nil) {
@@ -126,11 +143,14 @@ struct AddNoteView: View {
                         
                     }.bold()
                 }
-            
-
+                
+                
                 ToolbarItem(placement: .bottomBar) {
                     PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
                         Label("Add Image", systemImage : "camera")
+                            .accessibilityAddTraits([.isButton])
+                            .accessibilityLabel("Camera")
+                            .accessibilityHint("Double tap to add a photo into the current note")
                         
                     }
                     
@@ -144,9 +164,16 @@ struct AddNoteView: View {
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
-                    Image(systemName:"square.and.pencil")
-                        .foregroundStyle(.gray)
-                }
+                   // NavigationLink(destination: AddNoteView()){
+                        Button("Add Note", systemImage : "square.and.pencil") {
+                        }.disabled(true)
+                        .accessibilityAddTraits([.isButton])
+                        .accessibilityLabel("New note")
+                        .accessibilityHint("Double tap to compose a new note")
+                    }
+                        
+                
+                
                 
             }
             
@@ -172,6 +199,7 @@ struct AddNoteView: View {
     func saveText() -> DataNote {
         if(note == nil) {
             let newNote = DataNote(additionalText: additionalText)
+            newNote.timeStamp = Date.now
             if(newPhotoData != nil) {
                 //newNote.image = newPhotoData
                 newNote.storedImages.append(newPhotoData!)
@@ -188,6 +216,7 @@ struct AddNoteView: View {
     
     func updateText(_ note : DataNote) {
         note.additionalText = additionalText
+        note.timeStamp = Date.now
         try? context.save()
         
     }
