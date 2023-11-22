@@ -10,44 +10,104 @@ import SwiftData
 
 struct MainView: View {
     
+    //Swift Data
+    
     @Environment(\.modelContext) private var context
     
     @Query private var notes : [DataNote]
     
+    //Searchbar
     @State private var searchText = ""
+    
+    //Filter by additional text
+    var searchResults: [DataNote] {
+        if searchText.isEmpty {
+            return notes
+        } else {
+            return notes.filter { $0.additionalText.contains(searchText) }
+        }
+    }
+    
+    //Dynamic Type options
+    @Environment(\.sizeCategory) var sizeCategory
     
     var body: some View {
         
         NavigationStack {
+            
             List() {
-                ForEach(notes) { note in
-                    NavigationLink(destination: AddNoteView(note: note)) {
-                        VStack(alignment: .leading){
-                            HStack {
+                
+                //View if dynamic type is on
+                
+                if sizeCategory.isAccessibilityCategory {
+                    
+                    ForEach(searchResults, id: \.self) { note in
+                        NavigationLink(destination: AddNoteView(note: note)) {
+                            VStack(alignment: .leading){
                                 Text(note.timeStamp, format: .dateTime.day().month().year())
+                                    .fixedSize(horizontal: false, vertical: true)
                                     .bold()
+                                
+                                
                                 Text(note.additionalText)
-                                    .lineLimit(1)
-                                Spacer()
+                                    .lineLimit(3)
+                                    .font(.body)
+                                
+                                
+                                //Spacer()
                                 
                                 if let imageData = note.storedImages.first,
                                    let uiImage = UIImage(data: imageData){
                                     Image(uiImage: uiImage)
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(maxWidth: 35 , maxHeight: 35)
+                                        .frame(maxWidth: 150 , maxHeight: 170)
                                         .cornerRadius(5)
+                                }
+                            }
+                            
+                        }
+                    }
+                    .onDelete { indexes in
+                        for index in indexes {
+                            deleteNote(notes[index])
+                        }
+                    }
+                    
+                }  else {
+                    
+                    //Normal View
+                    
+                    ForEach(searchResults, id: \.self) { note in
+                        NavigationLink(destination: AddNoteView(note: note)) {
+                            VStack(alignment: .leading){
+                                HStack {
+                                    Text(note.timeStamp, format: .dateTime.day().month().year())
+                                        .bold()
+                                    Text(note.additionalText)
+                                        .lineLimit(1)
+                                    Spacer()
+                                    
+                                    if let imageData = note.storedImages.first,
+                                       let uiImage = UIImage(data: imageData){
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(maxWidth: 35 , maxHeight: 35)
+                                            .cornerRadius(5)
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                .onDelete { indexes in
-                    for index in indexes {
-                        deleteNote(notes[index])
+                    .onDelete { indexes in
+                        for index in indexes {
+                            deleteNote(notes[index])
+                        }
                     }
+                    
+                    
                 }
-                
                 
             }
             
@@ -81,8 +141,6 @@ struct MainView: View {
                         .accessibilityLabel("New note")
                         .accessibilityHint("Double tap to compose a new note")
                         
-                        
-                        
                     }
                     
                 }
@@ -90,8 +148,6 @@ struct MainView: View {
             }
             
         } .searchable(text: $searchText)
-        
-        
         
     }
     
@@ -101,14 +157,7 @@ struct MainView: View {
         context.delete(note)
     }
     
-    
-    
-    
-    
 }
-
-
-
 
 
 #Preview {

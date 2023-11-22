@@ -30,8 +30,6 @@ struct AddNoteView: View {
         
         NavigationStack {
             VStack(){
-               
-                
                 TextEditor(text: $additionalText)
                     .font(.body) //use font that support dynamic type
                     .focused($isFocused)
@@ -43,7 +41,6 @@ struct AddNoteView: View {
                         
                     }
                 
-                
                 VStack {
                     TabView {
                         
@@ -51,10 +48,12 @@ struct AddNoteView: View {
                             if let imageData = newPhotoData,
                                let uiImage = UIImage(data: imageData){
                                 Image(uiImage: uiImage)
+                                
                                     .resizable()
                                     .scaledToFill()
                                     .frame(maxWidth: .infinity , maxHeight: .infinity)
                                     .cornerRadius(15)
+                                    .accessibilityRemoveTraits(.isImage)
                                     .contextMenu(){
                                         Button(role: .destructive) {
                                             newPhotoData = nil
@@ -66,8 +65,6 @@ struct AddNoteView: View {
                                     }
                                         
                                     }
-                                //.padding(5)
-                                
                             }
                             
                         }
@@ -76,10 +73,10 @@ struct AddNoteView: View {
                             if let uiImage = UIImage(data: image){
                                 
                                 Image(uiImage: uiImage)
-                                    
                                     .resizable()
                                     .scaledToFill()
                                     .frame(maxWidth: .infinity , maxHeight: .infinity)
+                                    .accessibilityRemoveTraits(.isImage)
                                     .contextMenu(){
                                         Button(role: .destructive){
                                             if let idx = note?.storedImages.firstIndex(of: image) {
@@ -94,11 +91,10 @@ struct AddNoteView: View {
                                     }
                                     .accessibilityLabel("Image attachment")
                                     .accessibilityHint("Double tap and hold to scroll")
-                                    
+                                
                                 
                             }
                         }
-                        
                         
                     }.tabViewStyle(.page)
                         .containerShape(Rectangle())
@@ -132,8 +128,6 @@ struct AddNoteView: View {
                     Button("Done") {
                         if(note != nil) {
                             updateText(note ?? DataNote(additionalText: ""))
-                            
-                            
                         } else {
                             self.note = saveText()
                             
@@ -164,23 +158,19 @@ struct AddNoteView: View {
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
-                   // NavigationLink(destination: AddNoteView()){
-                        Button("Add Note", systemImage : "square.and.pencil") {
-                        }.disabled(true)
+                    // NavigationLink(destination: AddNoteView()){
+                    Button("Add Note", systemImage : "square.and.pencil") {
+                    }.disabled(true)
                         .accessibilityAddTraits([.isButton])
                         .accessibilityLabel("New note")
                         .accessibilityHint("Double tap to compose a new note")
-                    }
-                        
-                
-                
+                }
                 
             }
             
             .task(id: selectedPhoto) {
                 if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
                     if(note != nil) {
-                        //note?.image = data
                         note?.storedImages.append(data)
                         selectedPhoto = nil
                     } else {
@@ -204,13 +194,13 @@ struct AddNoteView: View {
                 //newNote.image = newPhotoData
                 newNote.storedImages.append(newPhotoData!)
             }
+            
             context.insert(newNote)
             
             return newNote
         }
         
         return DataNote(additionalText: "")
-        
         
     }
     
