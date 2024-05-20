@@ -17,7 +17,7 @@ As you can see from the image, if the option is enabled, the notes information w
 
 ## Features: 
 
-• Swift Data
+• SwiftData framework
 
 • VoiceOver
 
